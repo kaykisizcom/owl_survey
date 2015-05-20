@@ -14,13 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="{% static 'adminpanel/css/app.css' %}">
-    <link rel="stylesheet" href="{% static 'adminpanel/css/app.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <title>Telepanya</title>
+    <title>Anketör</title>
       <style>
           img {
               width: 50px;
@@ -32,7 +32,7 @@
 </head>
   <body>
     <div class="row">
-        <div class="side-menu2" id="side-menu">
+        <div class="side-menu" id="side-menu">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
                     <div class="brand-wrapper">
@@ -43,8 +43,8 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="brand-name-wrapper">
-                            <a class="navbar-brand" href="#">
-                                TELEPANYA LOGO
+                            <a class="navbar-brand" href="/">
+                                Anketör
                             </a>
                         </div>
                         <a data-toggle="collapse" href="#search" class="btn btn-default" id="search-trigger">
@@ -64,245 +64,17 @@
                 </div>
                 <div class="side-menu-container">
                     <ul class="nav navbar-nav">
-
-                        <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl1">
-                                <span class="fa fa-home"></span> Anasayfa <span class="caret"></span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="dropdown-lvl1" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="index.html">Anasayfa</a></li>
-                                        <li><a href="#">Haberler</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="panel panel-default active" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl2">
-                                <span class="fa fa fa-shopping-cart"></span> Ürünler <span class="caret"></span>
-                            </a>
-
-                            <div id="dropdown-lvl2" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/adminpanel/Product/my_product/">Ürünlerim</a></li>
-                                        <li><a href="/adminpanel/Product/all_product/">Tüm Ürünler</a></li>
-
-
-                                        <li class="panel panel-default" id="dropdown">
-                                            <a data-toggle="collapse" href="#dropdown-lvl3">
-                                                Vitrin Düzenle <span class="caret"></span>
-                                            </a>
-                                            <div id="dropdown-lvl3" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <ul class="nav navbar-nav">
-                                                        <li><a href="/adminpanel/Product/showcase/list_category">Kategori</a></li>
-                                                        <li><a href="/adminpanel/Product/showcase/list_home">Anasayfa</a></li>
-                                                        <li><a href="/adminpanel/Product/showcase/gallery">Galeri</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li><a href="/adminpanel/Product/my_product/">Kaldırdığım Ürünler</a></li>
-                                        <li class="panel panel-default" id="dropdown">
-                                            <a data-toggle="collapse" href="#dropdown-lvl4">
-                                                Teknik Özellikler <span class="caret"></span>
-                                            </a>
-                                            <div id="dropdown-lvl4" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <ul class="nav navbar-nav">
-                                                        <li><a href="/adminpanel/Product/new/new_features/">Özellikler</a></li>
-                                                        <li><a href="/adminpanel/Product/new/new_productdetails/">Özellik Detayı</a></li>
-                                                        <li><a href="/adminpanel/Product/new/new_optionalfeatures/">Opsiyonel Özellik</a></li>
-                                                        <li><a href="/adminpanel/Product/new/new_optionaldetails/">Opsiyonel Özellik Detayı</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl7">
-                                <span class="fa fa fa-user"></span> Kullanıcılar <span class="caret"></span>
-                            </a>
-
-                            <div id="dropdown-lvl7" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li class="panel panel-default" id="dropdown">
-                                            <a data-toggle="collapse" href="#dropdown-lvl5">
-                                                Kullanıcılar <span class="caret"></span>
-                                            </a>
-                                            <div id="dropdown-lvl5" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <ul class="nav navbar-nav">
-                                                        <li><a href="/adminpanel/Users/list_user/">Kullanıcılar</a></li>
-                                                        <li><a href="/adminpanel/Users/banned/">Kullanıcı Banla</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="panel panel-default" id="dropdown">
-                                            <a data-toggle="collapse" href="#dropdown-lvl6">
-                                                Bayiler <span class="caret"></span>
-                                            </a>
-                                            <div id="dropdown-lvl6" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <ul class="nav navbar-nav">
-                                                        <li><a href="/adminpanel/Users/list_company/">Bayiler</a></li>
-                                                        <li><a href="/adminpanel/Users/company_permission/">Bayi Yetkilikleri</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="panel panel-default" id="dropdown">
-                                            <a data-toggle="collapse" href="#dropdown-lvl14">
-                                                Yetkiler <span class="caret"></span>
-                                            </a>
-                                            <div id="dropdown-lvl14" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <ul class="nav navbar-nav">
-                                                        <li><a href="/adminpanel/Users/groups/">Grup Yönetimi</a></li>
-                                                        <li><a href="/adminpanel/Users/list_user/">Kullanıcı Yetkilendirme</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl8">
-                                <span class="fa fa-tags"></span> Kampanya Yönetimi <span class="caret"></span>
-                            </a>
-
-                            <div id="dropdown-lvl8" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/adminpanel/Campaign/campaign/">Hediye</a></li>
-                                        <li><a href="/adminpanel/Campaign/new/add_special_showcase/">İndirim</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl9">
-                                <span class="fa fa fa-gear"></span> Ayarlar <span class="caret"></span>
-                            </a>
-
-                            <div id="dropdown-lvl9" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/adminpanel/Settings/project_settings/">Site Bilgileri</a></li>
-                                        <li><a href="/adminpanel/Settings/company_settings/">Firma Bilgileri</a></li>
-                                        <li><a href="/adminpanel/Settings/footer/">Tema Ayarları</a></li>
-                                        <li><a href="#">Menü Ayarları</a></li>
-                                        <li><a href="/adminpanel/Settings/new/advertising/">Reklamlar</a></li>
-                                        <li><a href="#">Dil Seçenekleri</a></li>
-                                        <li class="panel panel-default" id="dropdown">
-                                            <a data-toggle="collapse" href="#dropdown-lvl10">
-                                                Ödemeler <span class="caret"></span>
-                                            </a>
-                                            <div id="dropdown-lvl10" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <ul class="nav navbar-nav">
-                                                        <li><a href="#">Banka Hesabı</a></li>
-                                                        <li><a href="#">Ödeme Tipleri</a></li>
-                                                        <li><a href="#">Özel Ödeme Tipleri</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl11">
-                                <span class="fa fa-bookmark"></span> Kategori Yönetimi <span class="caret"></span>
-                            </a>
-
-                            <div id="dropdown-lvl11" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/adminpanel/Category/new_category/">Kategoriler</a></li>
-                                        <li><a href="/adminpanel/Category/new_categoriesandfeatures/">Özellik Ekle</a></li>
-                                        <li><a href="/adminpanel/Category/new_brand_and_category/">Kategoriye Marka Ekle</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl12">
-                                <span class="fa fa-pencil"></span> İçerik Yönetimi <span class="caret"></span>
-                            </a>
-
-                            <div id="dropdown-lvl12" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/adminpanel/Product/new/new_brand/">Marka Ekleme</a></li>
-                                        <li><a href="/adminpanel/Content/list/basket/">Sepetler</a></li>
-                                        <li><a href="/adminpanel/Content/list/comments/">Yorum Yönetimi</a></li>
-                                        <li><a href="/adminpanel/Content/list/pages">Sayfalar</a></li>
-                                        <li><a href="/adminpanel/Content/list/hr_list">İş Başvuruları</a></li>
-                                        <li><a href="/adminpanel/Content/list/contacts">İletişim Formu</a></li>
-                                        <li><a href="/adminpanel/Content/new/new_cargo/">Kargo Yönetimi</a></li>
-                                        <li><a href="/adminpanel/Content/new/new_money_type/">Döviz</a></li>
-                                        <li><a href="/adminpanel/Content/list/messages/">Mesajlar</a></li>
-                                        <li><a href="/adminpanel/Content/new/city_county/">Ülke, Şehir ve İlçe Ekle</a></li>
-                                        <li><a href="/adminpanel/Content/delete/db_clean/">Veri Tabanı Bakımı</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-
-                        <li class="panel panel-default" id="dropdown">
-                            <a data-toggle="collapse" href="#dropdown-lvl13">
-                                <span class="fa fa-gift"></span> Siparişlerim <span class="caret"></span>
-                            </a>
-
-                            <div id="dropdown-lvl13" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="/adminpanel/Order/list/all_orders">Tüm Siparişler</a></li>
-                                        <li><a href="#">Sipariş Hataları</a></li>
-                                        <li><a href="/adminpanel/Order/list/complated/">Tamamlanan Siparişler</a></li>
-                                        <li><a href="/adminpanel/Order/list/not_complated/">Tamamlanmayan Siparişler</a></li>
-                                        <li><a href="/adminpanel/Order/list/canceled/">İptal Edilen</a></li>
-                                        <li><a href="/adminpanel/Order/new/return_product/">İade / Değişim </a></li>
-                                        <li><a href="/adminpanel/Order/list/the_payment/">Ödeme Yapılan</a></li>
-                                        <li><a href="/adminpanel/Order/list/dont_payment/">Ödeme Yapılmayan</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!--
-                        <li><a href="#"><span class="fa fa-envelope"></span> Mail Sistemi</a></li>
-                        <li><a href="#"><span class="fa fa-line-chart"></span> İstatistikler</a></li>
-                        <li><a href="#"><span class="fa fa-server"></span> Entegrasyon</a></li>
-                        -->
+                        <li><a href="/" class="fa fa-home"> Anasayfa </a></li>
+                        <li><a href="/view/surveys/" class="fa fa-check-square-o"> Anketler </a></li>
+                        <li><a href="/view/for_me_surveys/" class="fa fa-plus-square"> Bana Hitap Eden Anketler </a></li>
+                        <li><a href="/view/my_surveys/" class="fa fa-check-square-o"> Anketlerim </a></li>
+                        <li><a href="/edit/profile/" class="fa fa-cog"> Ayarlar </a></li>
                     </ul>
                 </div>
             </nav>
         </div>
 
-        <div class="" id="side-body">
+        <div class="side-body" id="side-body">
             <div class="head-inside" id="deneme">
                 <div class="panel panel-default" id="panel">
                     <div class="panel-heading">
@@ -311,24 +83,14 @@
                                 <a href="javascript:;" id="btn-toggle-menu"><span class="fa fa-bars fa-2x"></span></a>
                             </li>
                             <li>
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Siparişlerim">
-                                    <i class="fa fa-gift fa-2x"></i>
-                                </a>
+                                <a href="/new/survey/" id="btn-toggle-menu"><span class="fa fa-plus-circle fa-2x"></span></a>
                             </li>
-                            <li>
-                                <a href="/adminpanel/Product/new/product/new_product_sc" data-toggle="tooltip" data-placement="bottom" title="Ürün Ekle">
-                                    <i class="fa fa-cart-plus fa-2x"></i>
-                                </a>
-                            </li>
-
-
-                            <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="İstatistikler"><span class="fa fa-bar-chart fa-2x"></span></a></li>
                             <li class="dropdown">
                              <span data-toggle="dropdown" role="button" >
                                 <i class="fa fa-user fa-2x"></i> <i class="caret"></i>
                              </span>
                               <ul class="dropdown-menu" role="menu">
-                                <li><a href="/adminpanel/Users/edit_admin_profile/">Hesabım</a></li>
+                                <li><a href="/edit/profile/">Hesabım</a></li>
                                   <li><a href="#">Ayarlar</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/accounts/logout/">Çıkış</a></li>
@@ -349,7 +111,7 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="{% static 'adminpanel/js/app.js' %}"></script>
+	<script src="{% static 'js/app.js' %}"></script>
     <script>
         $(function () {
 

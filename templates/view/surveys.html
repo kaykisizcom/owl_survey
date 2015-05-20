@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tag %}
+{% load staticfiles %}
+
+{% block head_block %} {% endblock %}
+
+{% block menu_block %}
+{% endblock %}
+
+{% block container_block %}
+
+<div class="panel-body">
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>Fotoğraf</b></td>
+                                            <td><b>Anket Adı</b></td>
+                                            <td><b>Açıklama</b></td>
+                                            <td><b>Hitap Kitlesi</b></td>
+                                            <td><b>İşlem</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td><b>Fotoğraf</b></td>
+                                            <td><b>Anket Adı</b></td>
+                                            <td><b>Açıklama</b></td>
+                                            <td><b>Hitap Kitlesi</b></td>
+                                            <td><b>İşlem</b></td>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for survey in survey_list %}
+                                        <tr>
+                                            <td><img src="/media/{{ survey.photo }}"></td>
+                                            <td>{{ survey.name }}</td>
+                                            <td>{{ survey.description }}</td>
+                                            <td><ul>
+                                                {% for audience in survey.audience %}
+                                                <li>{{ audience.name }}</li>
+                                                {% endfor %}
+                                            </ul></td>
+                                            <td>
+                                                {% if not comment.is_approved %}
+                                                <a href="edit/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-check"></span> Düzenle </a>
+                                                {% endif %}
+                                                <a href="delete/survey/{{ survey.id }}/" class="btn btn-danger btn-xs"><span class="fa fa-times"></span> Sil</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+{% endblock %}
+{% block script_block %}{% endblock %}

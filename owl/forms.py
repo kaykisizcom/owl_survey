@@ -48,4 +48,5 @@ class EditUserDetailForm(forms.ModelForm):
 class SurveyForm(forms.ModelForm):
     class Meta:
         model = Survey
-        widgets = {}
+        widgets = {'user': forms.HiddenInput,
+                   }

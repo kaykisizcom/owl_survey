@@ -63,6 +63,8 @@ class Audience(models.Model):
     name = models.CharField(max_length=400, default='', null=False, blank=False)
     cdate = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return self.name
 
 """
 Users tablosunda kullanıcı bilgileri tutulmaktadır, Firma (Bayii)
@@ -92,7 +94,7 @@ class Users(models.Model):
     gender = models.BooleanField(null=False, choices=GENDER, blank=False, default=True)
     birthday = models.DateTimeField(null=True, blank=True)
     phone = models.CharField(max_length=11, default='', null=True, blank=True)
-    school = models.CharField(max_length=50, default='', null=False, blank=False)
+    school = models.CharField(max_length=50, default='', null=False, blank=True)
     jobs = models.CharField(max_length=50, default='', null=False, blank=False)
     been = models.ForeignKey(Cities, related_name='bean')
     lives_in = models.ForeignKey(Cities, related_name='live_in')
@@ -102,6 +104,7 @@ class Users(models.Model):
 
 class Survey(models.Model):
     user = models.ForeignKey(User)
+    photo = models.ImageField(null=True, blank=True, upload_to="survey/")
     name = models.CharField(max_length=200, default='', null=False, blank=False)
     description = models.CharField(max_length=1000, default='', null=False, blank=False)
     audience = models.ManyToManyField(Audience)
@@ -122,6 +125,7 @@ class Question(models.Model):
     description = models.CharField(max_length=200, default='', null=False, blank=False)
     image = models.ImageField(null=True, blank=True, upload_to="question/")
     max_limit = models.SmallIntegerField(blank=True)
+    select_limit = models.BooleanField(default=False)
     survey = models.ForeignKey(Survey)
     cdate = models.DateTimeField(auto_now_add=True)
 

@@ -31,8 +31,8 @@ LOGIN_REDIRECT_URL = '/'
 # Application definition
 
 # Facebook Django Open Facebook API
-FACEBOOK_APP_ID = '1602535269991420'
-FACEBOOK_APP_SECRET = 'f1c446e2c086c0a55c0d8747e405cc28'
+FACEBOOK_APP_ID = '470627419759473'
+FACEBOOK_APP_SECRET = '3ed374c324ca198ad0fc79bd569c1500'
 
 INSTALLED_APPS = (
     'django.contrib.admin',

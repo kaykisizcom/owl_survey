@@ -10,7 +10,200 @@
 
 {% block container_block %}
 
+<div class="row">
 
+        <div class="" id="side-body">
+            <div class="head-inside">
+                <div class="panel panel-default" id="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="well">
+                                    <ul class="nav nav-pills nav-stacked" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#1" aria-controls="1" role="tab" data-toggle="tab">Resimli ve Çoklu Soru</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#2" aria-controls="2" role="tab" data-toggle="tab">Resimli ve Tek</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#3" aria-controls="3" role="tab" data-toggle="tab">Seçmeli</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#4" aria-controls="4" role="tab" data-toggle="tab">Eklemeli</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#5" aria-controls="4" role="tab" data-toggle="tab">Yazılı</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#6" aria-controls="4" role="tab" data-toggle="tab">Puanlandırma</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="1">
+                                        <form class="form-horizontal" style="margin-top:10px;">
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Soru</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="question" id="id_question">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Açıklama</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="description" id="id_description">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Resim</label>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="form-control" name="image" id="id_image">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Çoklu Seçme</label>
+                                                <div class="col-sm-6">
+                                                    <input type="checkbox" class="form-control" name="select_limit" id="id_select_limit">
+                                                </div>
+                                            </div>
+                                            <hr/>
+
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Resim</label>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="form-control" name="image" id="id_image">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Seçenek</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="name" id="id_name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default" name="1">Kaydet</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="2">
+                                        <form class="form-horizontal" style="margin-top:10px;">
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default" name="2">Kaydet</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="3">
+
+                                        <form class="form-horizontal" style="margin-top:10px;">
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default" name="3">Kaydet</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="4">
+                                        <form class="form-horizontal" style="margin-top:10px;">
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default" name="4">Kaydet</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="5">
+                                        <form class="form-horizontal" style="margin-top:10px;">
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default" name="5">Kaydet</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="6">
+                                        <form class="form-horizontal" style="margin-top:10px;">
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default" name="6">Kaydet</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 {% endblock %}
 {% block script_block %}{% endblock %}
