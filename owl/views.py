@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, redirect
@@ -127,69 +128,76 @@ def signup(request):
 Profil düzenleme işlemi.
 """
 
-
+@login_required
 def edit_profile(request):
     try:
         user = User.objects.get(username=request.user.username)
         user_detail = Users.objects.get(user=user)
-        detail_form = EditUserForm()
-        profile_form = EditUserDetailForm()
+        profile_form = EditUserForm(instance=user)
+        detail_form = EditUserDetailForm(instance=user_detail)
     except Exception as e:
         print e
         return HttpResponseRedirect('/sorry/')
-    if request.method == 'POST' and 'user' in request.POST:  # normal form
+    print request.POST
+    if request.method == 'POST' and 'user_form' in request.POST:  # normal form
+        print "1"
         profile_form = EditUserForm(request.POST, instance=user)
         if profile_form.is_valid():
             try:
-                if User.objects.filter(email=profile_form.email).exists():
-                    raise profile_form.ValidationError("This email already used")
+                # if User.objects.filter(email=profile_form.email).exists():
+                #     raise profile_form.ValidationError("This email already used")
                 profile_form.save()
-                return HttpResponseRedirect('profile/edit_user_profile')
+                return HttpResponseRedirect('/edit/profile/')
             except Exception as e:
                 print e
                 return HttpResponseRedirect('/sorry/')
 
     elif request.method == 'POST' and 'user_detail' in request.POST:  # password form
+        print "2"
         detail_form = EditUserDetailForm(request.POST, request.FILES, instance=user_detail)
         if detail_form.is_valid():
             try:
                 detail_form.save()
-                return HttpResponseRedirect('profile/edit_user_profile')
+                return HttpResponseRedirect('/edit/profile/')
             except Exception as e:
                 print e
                 return HttpResponseRedirect('/sorry/')
-
     return render_to_response('edit/profile.html',
                               {'profile_form': profile_form, 'detail_form': detail_form, 'request': request},
                               context_instance=RequestContext(request))
 
 
+@login_required
 def edit_question(request, qid):
     # TODO add
     return render_to_response('edit/question.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def edit_survey(request, sid):
-    survey_item = Survey.object.get(id=sid)
-    form = SurveyForm(initial=survey_item)
     try:
+        survey_item = Survey.objects.get(id=int(sid), user=request.user.id)
+        print survey_item
+        form = SurveyForm(instance=survey_item)
         if request.method == 'POST':
             form = SurveyForm(request.POST, request.FILES)
             if form.is_valid():
                 rec = form.save()
-                return HttpResponseRedirect('/view/question/' + rec.id + '/')
+                return HttpResponseRedirect('/view/my_survey/')
     except Exception as e:
         print '%s (%s)' % (e.message, type(e))
         return HttpResponseRedirect('/sorry/')
     return render_to_response('edit/survey.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 @csrf_exempt
 def new_question(request, sid):
     # TODO add
     return render_to_response('new/question.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 @csrf_exempt
 def new_survey(request):
     form = SurveyForm(initial={'user': request.user.id})
@@ -205,32 +213,39 @@ def new_survey(request):
     return render_to_response('new/survey.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def view_question(request, sid):
     question_list = Question.objects.filter(survey_id=sid)
     return render_to_response('view/questions.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def view_survey(request):
     survey_list = Survey.objects.order_by('-id')[:10]
     return render_to_response('view/surveys.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def view_my_survey(request):
-    survey_list = Survey.objects.filter(user=request.user)
+    survey_list = Survey.objects.filter(user=request.user.id).all()
+    print survey_list
     return render_to_response('view/surveys.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def view_survey_for_audience(request):
     audience_list = Users.objects.filter(user=request.user).values_list('audience', flat=True)
     survey_list = Survey.objects.filter(audience__in=audience_list)
     return render_to_response('view/surveys.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def view_survey_by_id(request, sid):
     survey_item = Survey.objects.get(id=sid)
     return render_to_response('view/survey.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def delete_survey(request, sid):
     delete = Survey.objects.get(id=sid).delete()
-    return HttpResponseRedirect(request.get_full_path())
+    return HttpResponseRedirect('/view/my_surveys/')

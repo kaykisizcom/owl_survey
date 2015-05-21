@@ -139,6 +139,7 @@ class Option(models.Model):
 
 class WrittenResponse(models.Model):
     name = models.CharField(max_length=400, default='', null=False, blank=False)
+    question = models.ForeignKey(Question)
     cdate = models.DateTimeField(auto_now_add=True)
 
 

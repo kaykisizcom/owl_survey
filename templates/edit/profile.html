@@ -10,6 +10,123 @@
 
 {% block container_block %}
 
+<div class="panel-body">
+                        <div class="row">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <h3 class="panel-title">Bilgileri Düzenle</h3>
+                              </div>
+                                <div class="panel-body">
+                                    {% if detail_form.errors %}
+                                        {{ detail_form.errors }}
+                                    {% endif %}
+                                    {% if profile_form.errors %}
+                                        {{ profile_form.errors }}
+                                    {% endif %}
+                                <div class="row">
+                                    <form class="form-horizontal" name="user_form" id="id_user_form" method='POST' enctype="multipart/form-data" >
+                                         {% csrf_token %}
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">Kullanıcı Adı</label>
+                                            <div class="col-sm-3">
+                                                {{ profile_form.username|add_class:"form-control" }}
+                                            </div>
+
+                                            <label  class="col-sm-1 control-label">E-mail</label>
+                                            <div class="col-sm-2">
+                                                 {{ profile_form.email|add_class:"form-control" }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">İsim</label>
+                                            <div class="col-sm-3">
+                                                {{ profile_form.first_name|add_class:"form-control" }}
+                                            </div>
+
+                                            <label  class="col-sm-1 control-label">Soyisim</label>
+                                            <div class="col-sm-2">
+                                                 {{ profile_form.last_name|add_class:"form-control" }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                                  {{ profile_form.date_joined }}
+                                                  {{ profile_form.last_login }}
+                                                  {{ profile_form.password }}
+                                            <div class="col-sm-3">
+                                                <button type="submit" class="btn btn-default btn-block" name="user">Ekle</button>
+                                            </div>
+                                        </div>
+                                            <hr/>
+                                        {% if next %}
+                                            <input type="hidden" name="next" value="{{ next }}">
+                                        {% else %}
+                                            <input type="hidden" name="next" value="/">
+                                        {% endif %}
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <form class="form-horizontal" name="user_detail" id="id_user_detail" method='POST' >
+                                         {% csrf_token %}
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">Profile Photo</label>
+                                            <div class="col-sm-3">
+                                                {{ detail_form.profile_photo|add_class:"form-control" }}
+                                            </div>
+
+                                            <label  class="col-sm-1 control-label" style="text-align:center;">Cisiyet</label>
+                                            <div class="col-sm-2">
+                                                 {{ detail_form.gender|add_class:"form-control" }}
+                                            </div>
+                                            <label  class="col-sm-1 control-label" style="text-align:center;">Doğum Tarihi</label>
+                                            <div class="col-sm-3">
+                                                 {{ detail_form.birthday|add_class:"form-control" }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label  class="col-sm-2 control-label" style="text-align:center;">Okul</label>
+                                            <div class="col-sm-3">
+                                                 {{ detail_form.school|add_class:"form-control" }}
+                                            </div>
+                                            <label  class="col-sm-1 control-label" style="text-align:center;">İş</label>
+                                            <div class="col-sm-2">
+                                                 {{ detail_form.jobs|add_class:"form-control" }}
+                                            </div>
+
+                                            <label  class="col-sm-1 control-label" style="text-align:center;">Memleket</label>
+                                            <div class="col-sm-3">
+                                                 {{ detail_form.been|add_class:"form-control" }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label  class="col-sm-2 control-label" style="text-align:center;">Yaşadığı Yer</label>
+                                            <div class="col-sm-3">
+                                                 {{ detail_form.lives_in|add_class:"form-control" }}
+                                            </div>
+
+                                            <label  class="col-sm-3 control-label" style="text-align:center;">Hedef Kitle Tercihiniz</label>
+                                            <div class="col-sm-4">
+                                                 {{ detail_form.audience|add_class:"form-control" }}
+                                            </div>
+                                                {{ detail_form.user }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <button type="submit" class="btn btn-default btn-block" name="user_detail">Ekle</button>
+                                            </div>
+                                        </div>
+                                        {% if next %}
+                                            <input type="hidden" name="next" value="{{ next }}">
+                                        {% else %}
+                                            <input type="hidden" name="next" value="/">
+                                        {% endif %}
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 {% endblock %}

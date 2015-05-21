@@ -40,15 +40,17 @@
                                             <td>{{ survey.name }}</td>
                                             <td>{{ survey.description }}</td>
                                             <td><ul>
-                                                {% for audience in survey.audience %}
+                                                {% for audience in survey.audience.all %}
                                                 <li>{{ audience.name }}</li>
                                                 {% endfor %}
                                             </ul></td>
                                             <td>
-                                                {% if not comment.is_approved %}
-                                                <a href="edit/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-check"></span> Düzenle </a>
+                                                {% if survey.user == request.user %}
+                                                <a href="/edit/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-check"></span> Düzenle </a>
+                                                <a href="/delete/survey/{{ survey.id }}/" class="btn btn-danger btn-xs"><span class="fa fa-times"></span> Sil</a>
+                                                {% else %}
+                                                <a href="/view/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-check"></span> Çöz </a>
                                                 {% endif %}
-                                                <a href="delete/survey/{{ survey.id }}/" class="btn btn-danger btn-xs"><span class="fa fa-times"></span> Sil</a>
                                             </td>
                                         </tr>
                                     {% endfor %}

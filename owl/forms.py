@@ -29,7 +29,6 @@ class EditUserForm(forms.ModelForm):
         model = User
         widgets = {'last_login': forms.HiddenInput,
                    'is_superuser': forms.HiddenInput,
-                   'username': forms.HiddenInput,
                    'is_staff': forms.HiddenInput,
                    'date_joined': forms.HiddenInput,
                    'is_active': forms.HiddenInput,
@@ -42,7 +41,8 @@ class EditUserForm(forms.ModelForm):
 class EditUserDetailForm(forms.ModelForm):
     class Meta:
         model = Users
-        widgets = {}
+        widgets = {'user': forms.HiddenInput,
+                   }
 
 
 class SurveyForm(forms.ModelForm):
