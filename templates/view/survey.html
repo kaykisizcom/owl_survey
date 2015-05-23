@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tag %}
+{% load staticfiles %}
+
+{% block head_block %} {% endblock %}
+
+{% block menu_block %}
+{% endblock %}
+
+{% block container_block %}
+<div class="form-group" style="text-align: center;">
+<img src="/media/{{ survey_item.photo }}" style="width: 300px; height: auto" >
+
+    <hr/>
+<p><font size="6">{{ survey_item.name }}</font></p>
+{{ survey_item.description }}
+    <hr/>
+{{ survey_item.user.first_name }}  {{ survey_item.user.last_name }}
+    <hr/>
+<a href="/view/questions/{{ survey_item.id }}/"><button type="button" class="btn btn-primary">Ankete Başla</button></a>
+    <hr/>
+<p>Hedef Kitle</p>
+<p>-------------</p>
+    {% for item in survey_item.audience.all %}
+        <p>{{ item.name }}</p>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
+{% block script_block %}{% endblock %}

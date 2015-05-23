@@ -30,13 +30,10 @@
                                             <a href="#3" aria-controls="3" role="tab" data-toggle="tab">Seçmeli</a>
                                         </li>
                                         <li role="presentation">
-                                            <a href="#4" aria-controls="4" role="tab" data-toggle="tab">Eklemeli</a>
+                                            <a href="#4" aria-controls="4" role="tab" data-toggle="tab">Yazılı</a>
                                         </li>
                                         <li role="presentation">
-                                            <a href="#5" aria-controls="4" role="tab" data-toggle="tab">Yazılı</a>
-                                        </li>
-                                        <li role="presentation">
-                                            <a href="#6" aria-controls="4" role="tab" data-toggle="tab">Puanlandırma</a>
+                                            <a href="#5" aria-controls="5" role="tab" data-toggle="tab">Puanlandırma</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -45,66 +42,96 @@
 
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade in active" id="1">
-                                        <form class="form-horizontal" style="margin-top:10px;" enctype="multipart/form-data">
+                                        <form class="form-horizontal" style="margin-top:10px;" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label  class="col-sm-2 control-label">Soru</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="question" id="id_question">
+                                                    <input type="text" class="form-control" name="question1" id="id_question">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label  class="col-sm-2 control-label">Açıklama</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="description" id="id_description">
+                                                    <input type="text" class="form-control" name="description1" id="id_description">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Kullanıcı Seçimi</label>
+                                                <div class="col-sm-6">
+                                                    <input type="checkbox" class="form-control" name="add_user_value1" id="id_add_user_value">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label  class="col-sm-2 control-label">Resim</label>
                                                 <div class="col-sm-6">
-                                                    <input type="file" class="form-control" name="image" id="id_image">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label  class="col-sm-2 control-label">Çoklu Seçme</label>
-                                                <div class="col-sm-6">
-                                                    <input type="checkbox" class="form-control" name="select_limit" id="id_select_limit">
+                                                    <input type="file" class="form-control" value=" " name="image1" id="id_image">
                                                 </div>
                                             </div>
                                             <hr/>
 
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">Resim</label>
+                                                <label  class="col-sm-2 control-label">Seçenek Sayısı :</label>
                                                 <div class="col-sm-6">
-                                                    <input type="file" class="form-control" name="image" id="id_image">
+                                                    <input class="form-control" id="secim" name="secim" >
                                                 </div>
+
+                                            <div class="col-sm-2">
+                                              <button type="button" id="ekle1" class="btn btn-primary btn-md" value="asd">EKLE</button>
                                             </div>
-                                            <div class="form-group">
-                                                <label  class="col-sm-2 control-label">Seçenek</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="name" id="id_name">
-                                                </div>
                                             </div>
+                                            <div class="col-sm-12">
+                                                <div id="ekleme_alani1" class="gorunmez" class="col-sm-12" style="margin-top:10px;margin-bottom:10px"></div>
+                                            </div>
+                                            <div class="clearfix"></div><hr/>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-default" name="1">Kaydet</button>
+                                                    <button class="btn btn-default" name="1"> Kaydet </button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="2">
-                                        <form class="form-horizontal" style="margin-top:10px;">
+                                        <form class="form-horizontal" style="margin-top:10px;" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Soru</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="question2" id="id_question">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Açıklama</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="description2" id="id_description">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Kullanıcı Seçimi</label>
+                                                <div class="col-sm-6">
+                                                    <input type="checkbox" class="form-control" name="add_user_value2" id="id_add_user_value">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Resim</label>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="form-control" name="image" id="id_image">
+                                                </div>
+                                            </div>
+                                            <hr/>
+
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Seçenek Sayısı :</label>
+                                                <div class="col-sm-6">
+                                                    <input class="form-control" id="secim2" name="secim2" >
+                                                </div>
+
+                                            <div class="col-sm-2">
+                                              <button type="button" id="ekle2" class="btn btn-primary btn-md" value="asd">EKLE</button>
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div id="ekleme_alani2" class="gorunmez" class="col-sm-12" style="margin-top:10px;margin-bottom:10px"></div>
+                                            </div>
+                                            <div class="clearfix"></div><hr/>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <button type="submit" class="btn btn-default" name="2">Kaydet</button>
@@ -114,19 +141,41 @@
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="3">
 
-                                        <form class="form-horizontal" style="margin-top:10px;">
+                                        <form class="form-horizontal" style="margin-top:10px;" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Soru</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="question3" id="id_question">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Açıklama</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="description3" id="id_description">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Resim</label>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="form-control" value=" " name="image1" id="id_image">
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Seçenek Sayısı :</label>
+                                                <div class="col-sm-6">
+                                                    <input class="form-control" id="secim3" name="secim3" >
+                                                </div>
+
+                                            <div class="col-sm-2">
+                                              <button type="button" id="ekle3" class="btn btn-primary btn-md" value="asd">EKLE</button>
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div id="ekleme_alani3" class="gorunmez" class="col-sm-12" style="margin-top:10px;margin-bottom:10px"></div>
+                                            </div>
+                                            <div class="clearfix"></div><hr/>
+
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <button type="submit" class="btn btn-default" name="3">Kaydet</button>
@@ -135,64 +184,77 @@
                                         </form>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="4">
-                                        <form class="form-horizontal" style="margin-top:10px;">
+                                        <form class="form-horizontal" style="margin-top:10px;" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Soru</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="question4" id="id_question">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Açıklama</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="description4" id="id_description">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Resim</label>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="form-control" value=" " name="image1" id="id_image">
+                                                </div>
+                                            </div>
+                                            <hr/>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <button type="submit" class="btn btn-default" name="4">Kaydet</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </form >
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="5">
-                                        <form class="form-horizontal" style="margin-top:10px;">
+                                        <form class="form-horizontal" style="margin-top:10px;"  method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Soru</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="question5" id="id_question">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
+                                                <label  class="col-sm-2 control-label">Açıklama</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="description5" id="id_description">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Resim</label>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="form-control" value=" " name="image1" id="id_image">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Max Puan</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name="max_limit5" id="id_description">
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group">
+                                                <label  class="col-sm-2 control-label">Seçenek Sayısı :</label>
+                                                <div class="col-sm-6">
+                                                    <input class="form-control" id="secim5" name="secim5" >
+                                                </div>
+
+                                            <div class="col-sm-2">
+                                              <button type="button" id="ekle5" class="btn btn-primary btn-md" value="asd">EKLE</button>
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div id="ekleme_alani5" class="gorunmez" class="col-sm-12" style="margin-top:10px;margin-bottom:10px"></div>
+                                            </div>
+                                            <div class="clearfix"></div><hr/>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <button type="submit" class="btn btn-default" name="5">Kaydet</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="6">
-                                        <form class="form-horizontal" style="margin-top:10px;">
-                                            <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label  class="col-sm-2 control-label">lorem</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-default" name="6">Kaydet</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -204,6 +266,51 @@
                 </div>
             </div>
         </div>
+    </div>
 
 {% endblock %}
-{% block script_block %}{% endblock %}
+{% block script_block %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#ekle1").click(function(){
+        var inputCount = $('#ekleme_alani1 > input ').length;
+        $("#ekleme_alani1").removeClass("gorunmez");
+        var limit=$("#secim").val();
+          for ( var i=1 ; i<=limit ; i++){
+            var eklenecek='<div class="form-group"><label  class="col-sm-2 control-label">Resim ' + i + '</label><div class="col-sm-6"><input type="file" class="form-control" name="image1' + i + '" id="id_image"></div></div><div class="form-group"><label  class="col-sm-2 control-label">Seçenek ' + i + '</label><div class="col-sm-6"><input type="text" class="form-control" name="name1' + i + '" id="id_name"></div></div><hr/>';
+            $("#ekleme_alani1").append(eklenecek);
+          }
+    });
+    $("#ekle2").click(function(){
+        var inputCount = $('#ekleme_alani2 > input ').length;
+        $("#ekleme_alani2").removeClass("gorunmez");
+        var limit=$("#secim2").val();
+          for ( var i=1 ; i<=limit ; i++){
+            var eklenecek='<div class="form-group"><label  class="col-sm-2 control-label">Resim ' + i + '</label><div class="col-sm-6"><input type="file" class="form-control" name="image2' + i + '" id="id_image"></div></div><div class="form-group"><label  class="col-sm-2 control-label">Seçenek ' + i + '</label><div class="col-sm-6"><input type="text" class="form-control" name="name2' + i + '" id="id_name"></div></div><hr/>';
+            $("#ekleme_alani2").append(eklenecek);
+          }
+    });
+    $("#ekle3").click(function(){
+        var inputCount = $('#ekleme_alani3 > input ').length;
+        $("#ekleme_alani3").removeClass("gorunmez");
+        var limit=$("#secim3").val();
+          for ( var i=1 ; i<=limit ; i++){
+            var eklenecek='<div class="form-group"><label  class="col-sm-2 control-label">Seçenek ' + i + '</label><div class="col-sm-6"><input type="text" class="form-control" name="name3' + i + '" id="id_name' + i + '"></div></div>';
+            $("#ekleme_alani3").append(eklenecek);
+          }
+    });
+    $("#ekle5").click(function(){
+        var inputCount = $('#ekleme_alani5 > input ').length;
+        $("#ekleme_alani5").removeClass("gorunmez");
+        var limit=$("#secim5").val();
+          for ( var i=1 ; i<=limit ; i++){
+            var eklenecek='<div class="form-group"><label  class="col-sm-2 control-label">Seçenek ' + i + '</label><div class="col-sm-6"><input type="text" class="form-control" name="name5' + i + '" id="id_name' + i + '"></div></div>';
+            $("#ekleme_alani5").append(eklenecek);
+          }
+    });
+});
+</script>
+
+
+{% endblock %}

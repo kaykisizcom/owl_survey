@@ -116,7 +116,6 @@ class Question(models.Model):
         ('RC', 'Resimli ve Çoklu'),
         ('RT', 'Resimli ve Tek'),
         ('SB', 'Seçmeli'),
-        ('AA', 'Eklemeli'),
         ('WR', 'Yazılı'),
         ('PN', 'Puanlandırma')
     )
@@ -124,8 +123,8 @@ class Question(models.Model):
     question = models.CharField(max_length=400, default='', null=False, blank=False)
     description = models.CharField(max_length=200, default='', null=False, blank=False)
     image = models.ImageField(null=True, blank=True, upload_to="question/")
-    max_limit = models.SmallIntegerField(blank=True)
-    select_limit = models.BooleanField(default=False)
+    max_limit = models.SmallIntegerField(default=1)
+    add_user_value = models.BooleanField(default=False)
     survey = models.ForeignKey(Survey)
     cdate = models.DateTimeField(auto_now_add=True)
 
@@ -156,14 +155,20 @@ class UserOption(models.Model):
 
 
 class UserWR(models.Model):
-    question = models.ForeignKey(Question)
     user = models.ForeignKey(User)
     wr = models.ForeignKey(WrittenResponse)
     cdate = models.DateTimeField(auto_now_add=True)
 
 
 class UserTD(models.Model):
-    name = models.CharField(max_length=400, default='', null=False, blank=False)
+    point = models.SmallIntegerField(default=1, null=False, blank=False)
     user = models.ForeignKey(User)
     td = models.ForeignKey(TableDegree)
+    cdate = models.DateTimeField(auto_now_add=True)
+
+
+class UserValue(models.Model):
+    name = models.CharField(max_length=400, default='', null=False, blank=False)
+    user = models.ForeignKey(User)
+    question = models.ForeignKey(Question)
     cdate = models.DateTimeField(auto_now_add=True)

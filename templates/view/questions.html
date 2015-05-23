@@ -9,8 +9,158 @@
 {% endblock %}
 
 {% block container_block %}
+<div class="panel-body">
+    <div class="row">
+    <form method="POST">
+     {% csrf_token %}
+{% for question in question_list %}
+    {{ question.question_type }}
+<div class="form-group">
+    {% if question.question_type == 'RC' %}
+        <div class="panel panel-default">
+              <div class="panel-heading">
+              {% if question.image %}
+              <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
+              {% endif %}
+                <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>
+                <p>{{ question.description }}</p>
+              </div>
+            <div class="panel-body">
+                {% for option in option_list %}
+                    {% if option.question.id == question.id %}
 
+                        <div class="col-lg-4 col-xs-18 col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img  src="/media/{{ option.image }}" style="width: 200px; height: 200px" alt="Ürün">
+                                <div class="caption text-center">
+                                <p>{{ option.name }}</p>
+                                    <input class="form-control" type="checkbox" name="{{ question.id }}-{{ option.id }}" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+    {% elif question.question_type == 'RT' %}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              {% if question.image %}
+              <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
+              {% endif %}
+                <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>
+                <p>{{ question.description }}</p>
+              </div>
+            <div class="panel-body">
+                {% for option in option_list %}
+                    {% if option.question.id == question.id %}
 
+                        <div class="col-lg-4 col-xs-18 col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img  src="/media/{{ option.image }}" style="width: 200px; height: 200px" alt="Ürün">
+                                <div class="caption text-center">
+                                <p>{{ option.name }}</p>
+                                    <input class="form-control" type="radio" name="{{ question.id }}" value="{{ option.id }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endif %}
+                    {% endfor %}
+    {% elif question.question_type == 'SB' %}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              {% if question.image %}
+              <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
+              {% endif %}
+                <h2 class="panel-title"><b>{{ question.id }} {{ question.question }}</b></h2><br/>
+                <p>{{ question.description }}</p>
+              </div>
+            <div class="panel-body">
+                <select class="form-control" name="SB-{{ question.id }}">
+                    {% for option in option_list %}
+                        {% if option.question.id == question.id %}
+                    <option value="{{ option.id }}">
+                            {{ option.id }}{{ option.name }}
+                    </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+    {% elif question.question_type == 'WR' %}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+              {% if question.image %}
+              <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
+              {% endif %}
+                <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>
+                <p>{{ question.description }}</p>
+              </div>
+            <div class="panel-body">
+                <input class="form-control" name="wr{{ question.id }}">
+
+    {% elif question.question_type == 'PN' %}
+<div class="panel panel-default">
+              <div class="panel-heading">
+              {% if question.image %}
+              <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
+              {% endif %}
+                <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>
+                <p>{{ question.description }}</p>
+              </div>
+            <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td><b>Soru</b></td>
+                        {% for i in question.max_limit|get_range %}
+                        <td><b>{{ i }}</b></td>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><b>Soru</b></td>
+                        {% for i in question.max_limit|get_range %}
+                        <td><b>{{ i }}</b></td>
+                        {% endfor %}
+                    </tr>
+                </tfoot>
+                <tbody>
+                {% for td in td_list %}
+                    {% if td.question.id == question.id %}
+                    <tr>
+                        <td>{{ td.name }}</td>
+                        {% for i in question.max_limit|get_range %}
+                        <td><b><input class="form-control" type="radio" name="{{ td.id }}" value="{{ i }}"></b></td>
+                        {% endfor %}
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <button type="submit" class="btn btn-block btn-lg btn-primary">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% else %}
+                <input type="hidden" name="next" value="/">
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script_block %}
 
 {% endblock %}
-{% block script_block %}{% endblock %}

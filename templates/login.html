@@ -95,13 +95,23 @@ function facebook_login(){
                                 type: "POST",
                                 url: "/registered_facebook/",
                                 data: "access_token="+access_token,
-                                success:"/sayfa/",
+                                success:okey(),
                                 dataType: JSON
                             });
                         });
                     }
                 },{scope: 'email, public_profile'});
             });
+function okey(){
+{#alert("0");#}
+{#    {% if next %}#}
+{#        alert("1");#}
+{#        window.location.replace("{{ next }}");#}
+{#    {% else %}#}
+{#        alert("2");#}
+{#        window.location.replace("/");#}
+{#    {% endif %}#}
+        }
     } </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

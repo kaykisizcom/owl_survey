@@ -28,7 +28,7 @@ urlpatterns = patterns('',
                        url(r'^new/question/(?P<sid>[0-9]+)/$', 'owl.views.new_question'),
                        url(r'^new/survey/$', 'owl.views.new_survey'),
 
-                       url(r'^view/question/(?P<sid>[0-9]+)/$', 'owl.views.view_question'),
+                       url(r'^view/questions/(?P<sid>[0-9]+)/$', 'owl.views.view_question'),
                        url(r'^view/surveys/$', 'owl.views.view_survey'),
                        url(r'^view/my_surveys/$', 'owl.views.view_my_survey'),
                        url(r'^view/for_me_surveys/$', 'owl.views.view_survey_for_audience'),
