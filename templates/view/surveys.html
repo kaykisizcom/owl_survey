@@ -46,8 +46,10 @@
                                             </ul></td>
                                             <td>
                                                 {% if survey.user == request.user %}
-                                                <a href="/edit/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-check"></span> Düzenle </a>
+                                                <a href="/edit/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> Düzenle </a>
+                                                <a href="/result/{{ survey.id }}/" class="btn btn-primary btn-xs"><span class="fa fa-check"></span> Sonuçlar</a>
                                                 <a href="/delete/survey/{{ survey.id }}/" class="btn btn-danger btn-xs"><span class="fa fa-times"></span> Sil</a>
+                                                <a href="/view/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-check"></span> Çöz </a>
                                                 {% else %}
                                                 <a href="/view/survey/{{ survey.id }}/" class="btn btn-success btn-xs"><span class="fa fa-check"></span> Çöz </a>
                                                 {% endif %}

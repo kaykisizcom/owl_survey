@@ -3,8 +3,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.db.models import Count
 from django.http.response import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 
 # Create your views here.
 from django.template import RequestContext
@@ -316,7 +317,8 @@ def view_question(request, sid):
                                                 option_id=int(request.POST.get('SB-' + str(question.id))))
                 rec.save()
             elif question.question_type == 'WR':
-                wr = WrittenResponse.objects.create(name=request.POST.get('wr'+str(question.id)), question_id=question.id)
+                wr = WrittenResponse.objects.create(name=request.POST.get('wr' + str(question.id)),
+                                                    question_id=question.id)
                 wr.save()
                 rec = UserWR.objects.create(user_id=request.user.id, wr_id=wr.id)
                 rec.save()
@@ -359,3 +361,39 @@ def view_survey_by_id(request, sid):
 def delete_survey(request, sid):
     delete = Survey.objects.get(id=sid).delete()
     return HttpResponseRedirect('/view/my_surveys/')
+
+
+def result(request, sid):
+    list_question_result = []
+    survey = Survey.objects.get(id=sid)
+    question_list = Question.objects.filter(survey=survey.id)
+    for question in question_list:
+        if question.question_type == 'RC':
+            a = UserOption.objects.filter(option__in=Option.objects.filter(question=question.id)).values(
+                'option', 'option__name').annotate(total=Count('option')).all()
+            list_question_result.append([question.question_type, question, a])
+            print a
+        elif question.question_type == 'RT':
+            a = UserOption.objects.filter(option__in=Option.objects.filter(question=question.id)).values(
+                'option', 'option__name').annotate(total=Count('option')).all()
+            list_question_result.append([question.question_type, question, a])
+            print a
+        elif question.question_type == 'SB':
+            a = UserOption.objects.filter(option__in=Option.objects.filter(question=question.id)).values(
+                'option', 'option__name').annotate(total=Count('option')).all()
+            list_question_result.append([question.question_type, question, a])
+            print a
+        elif question.question_type == 'WR':
+            a = UserWR.objects.filter(wr__in=WrittenResponse.objects.filter(question=question.id)).values(
+                'wr', 'wr__name').annotate(total=Count('wr')).all()
+            list_question_result.append([question.question_type, question, a])
+            print a
+        elif question.question_type == 'PN':
+            a = UserTD.objects.filter(td__in=TableDegree.objects.filter(question=question.id)).values(
+                'point', 'td__name').annotate(total=Count('point')).all()
+            list_question_result.append([question.question_type, question, a])
+            print a
+            print list_question_result[2][1].id
+    print list_question_result
+    print list_question_result[0][1].id
+    return render_to_response('result.html', locals(), context_instance=RequestContext(request))

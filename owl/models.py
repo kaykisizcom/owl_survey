@@ -1,4 +1,5 @@
 # coding=utf-8
+from twisted.internet.tcp import _AbortingMixin
 
 __author__ = 'mehmet'
 
@@ -17,8 +18,11 @@ Cities Adres bilgisi için il bilgisini içerir.
 
 
 class Cities(models.Model):
-    name = models.CharField(max_length=15, default='', null=False, blank=False)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Şehir".decode('utf-8'))
+        verbose_name_plural = _("Şehirler".decode('utf-8'))
+    name = models.CharField(max_length=15, default='', null=False, blank=False, verbose_name="Şehir")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
 
     def __unicode__(self):
         return self.name
@@ -36,6 +40,10 @@ Bu tablodaki değerler sosyal medya hesap bilgilerini içermektedir.
 
 
 class SocialData(models.Model):
+
+    class Meta:
+        verbose_name = _("Sosyal Veriler")
+        verbose_name_plural = _("Sosyal Veriler")
     ACCOUNT_CHOICES = (
         (u'0', u'facebook'),
         (u'1', u'twitter'),
@@ -60,11 +68,15 @@ Hedef kitle
 
 
 class Audience(models.Model):
-    name = models.CharField(max_length=400, default='', null=False, blank=False)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Hedef Kitle")
+        verbose_name_plural = _("Hedef Kitleler")
+    name = models.CharField(max_length=400, default='', null=False, blank=False, verbose_name="Adı")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
 
     def __unicode__(self):
         return self.name
+
 
 """
 Users tablosunda kullanıcı bilgileri tutulmaktadır, Firma (Bayii)
@@ -85,33 +97,50 @@ kullanıcılarıda bu sınıftan türetilmektedir.
 
 
 class Users(models.Model):
+    class Meta:
+        verbose_name = _("Kullanıcı detay".decode('utf-8'))
+        verbose_name_plural = _("Kullanıcı detayları".decode('utf-8'))
+
     GENDER = (
         (False, _(u'KADIN')),
         (True, _(u'ERKEK')),
     )
-    user = models.ForeignKey(User)
-    profile_photo = models.ImageField(null=True, blank=True, upload_to="profile_photos/")
-    gender = models.BooleanField(null=False, choices=GENDER, blank=False, default=True)
-    birthday = models.DateTimeField(null=True, blank=True)
-    phone = models.CharField(max_length=11, default='', null=True, blank=True)
-    school = models.CharField(max_length=50, default='', null=False, blank=True)
-    jobs = models.CharField(max_length=50, default='', null=False, blank=False)
-    been = models.ForeignKey(Cities, related_name='bean')
-    lives_in = models.ForeignKey(Cities, related_name='live_in')
-    audience = models.ManyToManyField(Audience)
-    cdate = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, verbose_name="Kullanıcı")
+    profile_photo = models.ImageField(null=True, blank=True, upload_to="profile_photos/", verbose_name="Fotoğraf")
+    gender = models.BooleanField(null=False, choices=GENDER, blank=False, default=True, verbose_name="Cinsiyet")
+    birthday = models.DateTimeField(null=True, blank=True, verbose_name="Doğum Günü")
+    phone = models.CharField(max_length=11, default='', null=True, blank=True, verbose_name="Telefon")
+    school = models.CharField(max_length=50, default='', null=False, blank=True, verbose_name="Okul")
+    jobs = models.CharField(max_length=50, default='', null=False, blank=False, verbose_name="İş")
+    been = models.ForeignKey(Cities, related_name='bean', verbose_name="Memleket")
+    lives_in = models.ForeignKey(Cities, related_name='live_in', verbose_name="Yaşadığı Yer")
+    audience = models.ManyToManyField(Audience, verbose_name="Hedef Kitle Tipi")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.user.username + ' (' + self.user.first_name + ' ' + self.user.last_name + ')'
 
 
 class Survey(models.Model):
-    user = models.ForeignKey(User)
-    photo = models.ImageField(null=True, blank=True, upload_to="survey/")
-    name = models.CharField(max_length=200, default='', null=False, blank=False)
-    description = models.CharField(max_length=1000, default='', null=False, blank=False)
-    audience = models.ManyToManyField(Audience)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Anket")
+        verbose_name_plural = _("Anketler")
+
+    user = models.ForeignKey(User, verbose_name="Kullanıcı")
+    photo = models.ImageField(null=True, blank=True, upload_to="survey/", verbose_name="Fotoğraf")
+    name = models.CharField(max_length=200, default='', null=False, blank=False, verbose_name="Adı")
+    description = models.CharField(max_length=1000, default='', null=False, blank=False, verbose_name="Açıklama")
+    audience = models.ManyToManyField(Audience, verbose_name="Hedef Kitle")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.name
 
 
 class Question(models.Model):
+    class Meta:
+        verbose_name = _("Soru")
+        verbose_name_plural = _("Sorular")
     QUESTION_TYPE = (
         ('RC', 'Resimli ve Çoklu'),
         ('RT', 'Resimli ve Tek'),
@@ -119,56 +148,101 @@ class Question(models.Model):
         ('WR', 'Yazılı'),
         ('PN', 'Puanlandırma')
     )
-    question_type = models.CharField(max_length=2, choices=QUESTION_TYPE, default='ST')
-    question = models.CharField(max_length=400, default='', null=False, blank=False)
-    description = models.CharField(max_length=200, default='', null=False, blank=False)
-    image = models.ImageField(null=True, blank=True, upload_to="question/")
-    max_limit = models.SmallIntegerField(default=1)
-    add_user_value = models.BooleanField(default=False)
-    survey = models.ForeignKey(Survey)
-    cdate = models.DateTimeField(auto_now_add=True)
+    question_type = models.CharField(max_length=2, choices=QUESTION_TYPE, default='ST', verbose_name="Soru Tipi")
+    question = models.CharField(max_length=400, default='', null=False, blank=False, verbose_name="Soru")
+    description = models.CharField(max_length=200, default='', null=False, blank=False, verbose_name="Açıklama")
+    image = models.ImageField(null=True, blank=True, upload_to="question/", verbose_name="Resim")
+    max_limit = models.SmallIntegerField(default=1, verbose_name="Max limit")
+    add_user_value = models.BooleanField(default=False, verbose_name="Özel Yanıt Ekleme")
+    survey = models.ForeignKey(Survey, verbose_name="Anket")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.question
 
 
 class Option(models.Model):
-    name = models.CharField(max_length=400, default='', null=False, blank=False)
-    image = models.ImageField(null=True, blank=True, upload_to="option/")
-    question = models.ForeignKey(Question)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Seçenek".decode('utf-8'))
+        verbose_name_plural = _("Seçenekler".decode('utf-8'))
+    name = models.CharField(max_length=400, default='', null=False, blank=False, verbose_name="Adı")
+    image = models.ImageField(null=True, blank=True, upload_to="option/", verbose_name="Resim")
+    question = models.ForeignKey(Question, verbose_name="Soru")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.name
 
 
 class WrittenResponse(models.Model):
-    name = models.CharField(max_length=400, default='', null=False, blank=False)
-    question = models.ForeignKey(Question)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Değerlendirme".decode('utf-8'))
+        verbose_name_plural = _("Değerlendirmeler".decode('utf-8'))
+    name = models.CharField(max_length=400, default='', null=False, blank=False, verbose_name="Adı")
+    question = models.ForeignKey(Question, verbose_name="Soru")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.name
 
 
 class TableDegree(models.Model):
-    name = models.CharField(max_length=400, default='', null=False, blank=False)
-    question = models.ForeignKey(Question)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Tablo Değeri".decode('utf-8'))
+        verbose_name_plural = _("Tablo Değerleri".decode('utf-8'))
+    name = models.CharField(max_length=400, default='', null=False, blank=False, verbose_name="Adı")
+    question = models.ForeignKey(Question, verbose_name="Soru")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.name
 
 
 class UserOption(models.Model):
-    user = models.ForeignKey(User)
-    option = models.ForeignKey(Option)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Kullanıcı Cevabı".decode('utf-8'))
+        verbose_name_plural = _("Kullanıcı Cevapları".decode('utf-8'))
+    user = models.ForeignKey(User, verbose_name="Kullanıcı")
+    option = models.ForeignKey(Option, verbose_name="Seçenek")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.option.name
 
 
 class UserWR(models.Model):
-    user = models.ForeignKey(User)
-    wr = models.ForeignKey(WrittenResponse)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Kullanıcı Yanıtı".decode('utf-8'))
+        verbose_name_plural = _("Kullanıcı yanıtları".decode('utf-8'))
+    user = models.ForeignKey(User, verbose_name="Kullanıcı")
+    wr = models.ForeignKey(WrittenResponse, verbose_name="Yanıt")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.wr.name
 
 
 class UserTD(models.Model):
-    point = models.SmallIntegerField(default=1, null=False, blank=False)
-    user = models.ForeignKey(User)
-    td = models.ForeignKey(TableDegree)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Kullanıcı Puanlama".decode('utf-8'))
+        verbose_name_plural = _("Kullanıcı Puanları".decode('utf-8'))
+    point = models.SmallIntegerField(default=1, null=False, blank=False, verbose_name="Puan")
+    user = models.ForeignKey(User, verbose_name="Kullanıcı")
+    td = models.ForeignKey(TableDegree, verbose_name="Tablo Değeri")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.td.name
 
 
 class UserValue(models.Model):
-    name = models.CharField(max_length=400, default='', null=False, blank=False)
-    user = models.ForeignKey(User)
-    question = models.ForeignKey(Question)
-    cdate = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = _("Kullanıcı Değerlendirmesi".decode('utf-8'))
+        verbose_name_plural = _("Kullanıcı Değerlendirmeleri".decode('utf-8'))
+    name = models.CharField(max_length=400, default='', null=False, blank=False, verbose_name="Adı")
+    user = models.ForeignKey(User, verbose_name="Kullanıcı")
+    question = models.ForeignKey(Question, verbose_name="Soru")
+    cdate = models.DateTimeField(auto_now_add=True, verbose_name="Kayıt Tarihi")
+
+    def __unicode__(self):
+        return self.name

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load tag %}
+{% load staticfiles %}
+
+{% block head_block %}
+    <script type="text/javascript">
+window.onload = function () {
+
+    {% for question in list_question_result %}
+        {% if question.0 == 'RC' or question.0 == 'RT' %}
+	var chart = new CanvasJS.Chart("{{ question.1.id }}",
+	{
+		title:{
+			text:"{{ question.1.question }}"
+		},
+                animationEnabled: true,
+		legend:{
+			verticalAlign: "center",
+			horizontalAlign: "left",
+			fontSize: 20,
+			fontFamily: "Helvetica"
+		},
+		theme: "theme2",
+		data: [
+		{
+			type: "pie",
+			indexLabelFontFamily: "Garamond",
+			indexLabelFontSize: 20,
+			indexLabel: "{label} {y}%",
+			startAngle:-20,
+			showInLegend: true,
+			toolTipContent:"{legendText} {y}%",
+			dataPoints: [
+                {% if question.2 != None %}
+                    {% for option in question.2 %}
+                        { y: "{{ option.total }}", legendText:"{{ option.option__name }}", label: "{{ option.option__name }}" },
+                    {% endfor %}
+                {% else %}
+                    {  y: 83.24, legendText:"Google", label: "Google" },
+                {% endif %}
+
+
+            ]
+		}
+		]
+	});
+        {% elif question.0 == 'PN' %}
+            var chart = new CanvasJS.Chart("{{ question.1.id }}",
+	{
+		title:{
+			text:"{{ question.1.question }}"
+		},
+                animationEnabled: true,
+		legend:{
+			verticalAlign: "center",
+			horizontalAlign: "left",
+			fontSize: 20,
+			fontFamily: "Helvetica"
+		},
+		theme: "theme2",
+		data: [
+		{
+			type: "pie",
+			indexLabelFontFamily: "Garamond",
+			indexLabelFontSize: 20,
+			indexLabel: "{label} {y}",
+			startAngle:-20,
+			showInLegend: true,
+			toolTipContent:"{legendText} {y}",
+			dataPoints: [
+                {% if question.2 != None %}
+                    {% for point in question.2 %}
+                        { y: "{{ point.total }}", legendText:"{{ point.td__name }}", label: "{{ point.td__name }}" },
+                    {% endfor %}
+                {% else %}
+                    {  y: 83.24, legendText:"Google", label: "Google" },
+                {% endif %}
+
+            ]
+		}
+		]
+	});
+        {% endif %}
+	chart.render();
+    {% endfor %}
+}
+</script>
+<script type="text/javascript" src="/static/js/canvasjs.min.js"></script>
+{% endblock %}
+
+{% block menu_block %}
+{% endblock %}
+
+{% block container_block %}
+{% for question in list_question_result %}
+    {% if question.2.0 != None %}
+        {% if question.0 == 'WR' %}
+            <div class="panel-body">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ question.1.question }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% for result in question.2 %}
+                                {% if result.wr__name != '' %}
+                                    {{ result.wr__name }}
+                                    <hr/>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div id="{{ question.1.id }}" style="height: 300px; width: 100%;"></div>
+        {% endif %}
+    {% else %}
+            <div hidden="true" id="{{ question.1.id }}" style="height: 300px; width: 100%;"></div>
+            <p style="text-align: center"><strong>{{ question.1.question }} hakkında bir yanıt yok :(</strong></p>    <hr/>
+    {% endif %}
+    <hr/>
+{% endfor %}
+{% endblock %}
+{% block script_block %}{% endblock %}
+

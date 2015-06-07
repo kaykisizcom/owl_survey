@@ -6,12 +6,10 @@ from owl_survey import settings
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-                       # Examples:
-                       # url(r'^$', 'owl_survey.views.home', name='home'),
-                       # url(r'^blog/', include('blog.urls')),
 
+urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
+
                        url(r'^$', 'owl.views.home'),
                        url(r'^/$', 'owl.views.home'),
                        url(r'^accounts/signup/$', 'owl.views.signup'),
@@ -36,4 +34,6 @@ urlpatterns = patterns('',
 
 
                        url(r'^delete/survey/(?P<sid>[0-9]+)/$', 'owl.views.delete_survey'),
+                       url(r'^result/(?P<sid>[0-9]+)/$', 'owl.views.result'),
                        ) + staticfiles_urlpatterns() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
