@@ -8,8 +8,8 @@ register = template.Library()
 
 
 @register.filter
-def get_discount(d, key):
-    return d[key]
+def get_discount(d, total):
+    return d*100/total
 
 
 class_re = re.compile(r'(?<=class=["\'])(.*)(?=["\'])')

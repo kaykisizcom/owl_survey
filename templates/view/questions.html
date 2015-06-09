@@ -16,10 +16,10 @@
 {% for question in question_list %}
     {{ question.question_type }}
 <div class="form-group">
-    {% if question.question_type == 'RC' %}
+     {% if question.question_type == 'RC' %}
         <div class="panel panel-default">
               <div class="panel-heading">
-              {% if question.image %}
+              {% if question.image != '' %}
               <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
               {% endif %}
                 <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>
@@ -31,7 +31,9 @@
 
                         <div class="col-lg-4 col-xs-18 col-sm-6 col-md-3">
                             <div class="thumbnail">
-                                <img  src="/media/{{ option.image }}" style="width: 200px; height: 200px" alt="Ürün">
+                                {% if option.image != '' %}
+                                    <img  src="/media/{{ option.image }}" style="width: 200px; height: 200px" alt="Ürün">
+                                {% endif %}
                                 <div class="caption text-center">
                                 <p>{{ option.name }}</p>
                                     <input class="form-control" type="checkbox" name="{{ question.id }}-{{ option.id }}" value="1">
@@ -43,7 +45,7 @@
     {% elif question.question_type == 'RT' %}
             <div class="panel panel-default">
               <div class="panel-heading">
-              {% if question.image %}
+              {% if question.image != '' %}
               <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
               {% endif %}
                 <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>
@@ -55,7 +57,9 @@
 
                         <div class="col-lg-4 col-xs-18 col-sm-6 col-md-3">
                             <div class="thumbnail">
+                                {% if option.image != '' %}
                                 <img  src="/media/{{ option.image }}" style="width: 200px; height: 200px" alt="Ürün">
+                                {% endif %}
                                 <div class="caption text-center">
                                 <p>{{ option.name }}</p>
                                     <input class="form-control" type="radio" name="{{ question.id }}" value="{{ option.id }}">
@@ -68,7 +72,7 @@
     {% elif question.question_type == 'SB' %}
             <div class="panel panel-default">
               <div class="panel-heading">
-              {% if question.image %}
+              {% if question.image != '' %}
               <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
               {% endif %}
                 <h2 class="panel-title"><b>{{ question.id }} {{ question.question }}</b></h2><br/>
@@ -87,7 +91,7 @@
     {% elif question.question_type == 'WR' %}
             <div class="panel panel-default">
               <div class="panel-heading">
-              {% if question.image %}
+              {% if question.image != '' %}
               <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
               {% endif %}
                 <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>
@@ -99,7 +103,7 @@
     {% elif question.question_type == 'PN' %}
 <div class="panel panel-default">
               <div class="panel-heading">
-              {% if question.image %}
+              {% if question.image != '' %}
               <img src="/media/{{ question.image }}" style="width: 300px; height: 300px" >
               {% endif %}
                 <h2 class="panel-title"><b>{{ question.question }}</b></h2><br/>

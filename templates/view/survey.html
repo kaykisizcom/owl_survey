@@ -10,8 +10,11 @@
 
 {% block container_block %}
 <div class="form-group" style="text-align: center;">
-<img src="/media/{{ survey_item.photo }}" style="width: 300px; height: auto" >
-
+{% if survey_item.photo != '' %}
+    <img src="/media/{{ survey_item.photo }}" style="width: 300px; height: auto" >
+{% else %}
+    <img src="{% static 'survey_icon.png' %}" style="width: 300px; height: auto" >
+{% endif %}
     <hr/>
 <p><font size="6">{{ survey_item.name }}</font></p>
 {{ survey_item.description }}

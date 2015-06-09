@@ -35,5 +35,6 @@ urlpatterns = patterns('',
 
                        url(r'^delete/survey/(?P<sid>[0-9]+)/$', 'owl.views.delete_survey'),
                        url(r'^result/(?P<sid>[0-9]+)/$', 'owl.views.result'),
+                       url(r'^sorry/$', 'owl.views.sorry'),
                        ) + staticfiles_urlpatterns() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

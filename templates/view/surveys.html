@@ -36,7 +36,13 @@
                                     <tbody>
                                     {% for survey in survey_list %}
                                         <tr>
-                                            <td><img src="/media/{{ survey.photo }}"></td>
+                                            <td>
+                                                {% if survey.photo != '' %}
+                                                    <img src="/media/{{ survey.photo }}">
+                                                {% else %}
+                                                    <img src="{% static 'survey_icon.png' %}">
+                                                {% endif %}
+                                            </td>
                                             <td>{{ survey.name }}</td>
                                             <td>{{ survey.description }}</td>
                                             <td><ul>

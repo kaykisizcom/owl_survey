@@ -19,6 +19,10 @@ def home(request):
     return render_to_response('home.html', locals(), context_instance=RequestContext(request))
 
 
+def sorry(request):
+    return render_to_response('sorry.html', locals(), context_instance=RequestContext(request))
+
+
 @transaction.atomic
 @csrf_exempt
 def registered_facebook(request):
@@ -354,6 +358,8 @@ def view_survey_for_audience(request):
 @login_required
 def view_survey_by_id(request, sid):
     survey_item = Survey.objects.get(id=sid)
+    if survey_item.photo == '':
+        print survey_item.photo
     return render_to_response('view/survey.html', locals(), context_instance=RequestContext(request))
 
 
@@ -365,35 +371,41 @@ def delete_survey(request, sid):
 
 def result(request, sid):
     list_question_result = []
+    total_options_value = 0
     survey = Survey.objects.get(id=sid)
     question_list = Question.objects.filter(survey=survey.id)
     for question in question_list:
         if question.question_type == 'RC':
             a = UserOption.objects.filter(option__in=Option.objects.filter(question=question.id)).values(
                 'option', 'option__name').annotate(total=Count('option')).all()
-            list_question_result.append([question.question_type, question, a])
-            print a
+            for total_option in a:
+                total_options_value += total_option['total']
+            list_question_result.append([question.question_type, question, a, total_options_value])
+            total_options_value = 0
         elif question.question_type == 'RT':
+            for total_option in a:
+                total_options_value += total_option['total']
             a = UserOption.objects.filter(option__in=Option.objects.filter(question=question.id)).values(
                 'option', 'option__name').annotate(total=Count('option')).all()
-            list_question_result.append([question.question_type, question, a])
-            print a
+            list_question_result.append([question.question_type, question, a, total_options_value])
+            total_options_value = 0
         elif question.question_type == 'SB':
             a = UserOption.objects.filter(option__in=Option.objects.filter(question=question.id)).values(
                 'option', 'option__name').annotate(total=Count('option')).all()
-            list_question_result.append([question.question_type, question, a])
-            print a
+            for total_option in a:
+                total_options_value += total_option['total']
+            list_question_result.append([question.question_type, question, a, total_options_value])
+            total_options_value = 0
         elif question.question_type == 'WR':
             a = UserWR.objects.filter(wr__in=WrittenResponse.objects.filter(question=question.id)).values(
                 'wr', 'wr__name').annotate(total=Count('wr')).all()
             list_question_result.append([question.question_type, question, a])
-            print a
         elif question.question_type == 'PN':
             a = UserTD.objects.filter(td__in=TableDegree.objects.filter(question=question.id)).values(
                 'point', 'td__name').annotate(total=Count('point')).all()
-            list_question_result.append([question.question_type, question, a])
-            print a
-            print list_question_result[2][1].id
+            for total_option in a:
+                total_options_value += total_option['total']
+            list_question_result.append([question.question_type, question, a, total_options_value])
+            total_options_value = 0
     print list_question_result
-    print list_question_result[0][1].id
     return render_to_response('result.html', locals(), context_instance=RequestContext(request))
